@@ -180,6 +180,23 @@ class HackHeistAppTests(unittest.TestCase):
         self.assertEqual(state.status_code, 200)
         self.assertTrue(state.get_json()["registration_open"])
 
+    def test_registration_controls_use_server_state(self):
+        project_root = Path(__file__).resolve().parents[1]
+        index = (project_root / "index.html").read_text()
+        script = (project_root / "script.js").read_text()
+        self.assertEqual(index.count("data-registration-trigger"), 2)
+        self.assertIn('fetch("/api/state"', script)
+        self.assertIn("trigger.disabled = !registrationOpen", script)
+        self.assertIn("trigger.classList.toggle(\"button-disabled\", !registrationOpen)", script)
+        self.assertIn("state.registration_open === true", script)
+
+    def test_script_route_disables_stale_cache(self):
+        response = self.client.get("/script.js")
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("no-cache", response.headers["Cache-Control"])
+        self.assertIn("must-revalidate", response.headers["Cache-Control"])
+        response.close()
+
     def test_health_check(self):
         response = self.client.get("/healthz")
         self.assertEqual(response.status_code, 200)
