@@ -175,6 +175,11 @@ class HackHeistAppTests(unittest.TestCase):
             403,
         )
 
+    def test_health_check(self):
+        response = self.client.get("/healthz")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.get_json(), {"status": "ok"})
+
     def test_admin_requires_login_and_shows_records(self):
         self.assertEqual(self.client.get("/admin").status_code, 302)
         self.register("Ada Lovelace", "ada@example.com")

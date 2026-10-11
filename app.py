@@ -76,6 +76,10 @@ def create_app(test_config=None):
     def assets(filename):
         return send_from_directory(BASE_DIR / "assets", filename)
 
+    @app.get("/healthz")
+    def healthz():
+        return jsonify({"status": "ok"})
+
     @app.get("/api/state")
     def api_state():
         return jsonify(
