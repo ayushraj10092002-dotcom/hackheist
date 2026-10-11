@@ -16,6 +16,7 @@ const challengeStatus = document.querySelector(".challenge-status");
 const challengeReset = document.querySelector(".challenge-reset");
 const challengeSuccess = document.querySelector(".challenge-success");
 const eventAccess = document.querySelector("[data-event-access]");
+const registrationTriggers = document.querySelectorAll("[data-registration-trigger]");
 const vaultCode = "264";
 let challengeAttempts = 0;
 const operationIntro = document.querySelector("[data-operation-intro]");
@@ -174,6 +175,26 @@ if ("IntersectionObserver" in window && progressSteps.length) {
 }
 
 if (eventAccess) {
+  const updateRegistrationTriggers = (registrationOpen) => {
+    registrationTriggers.forEach((trigger) => {
+      trigger.disabled = !registrationOpen;
+      trigger.setAttribute("aria-disabled", String(!registrationOpen));
+      trigger.classList.toggle("button-disabled", !registrationOpen);
+      trigger.innerHTML = registrationOpen
+        ? "Register Now"
+        : "Register Now <span>/ Opening Soon</span>";
+    });
+  };
+
+  registrationTriggers.forEach((trigger) => {
+    trigger.addEventListener("click", () => {
+      eventAccess.scrollIntoView({behavior: "smooth", block: "center"});
+      window.setTimeout(() => {
+        eventAccess.querySelector("input")?.focus();
+      }, 350);
+    });
+  });
+
   const renderMessage = (message, type = "status") => {
     eventAccess.querySelector("[role=status], [role=alert]")?.remove();
     const element = document.createElement("p");
@@ -262,6 +283,7 @@ if (eventAccess) {
       const response = await fetch("/api/state", {headers: {"Accept": "application/json"}});
       if (!response.ok) return;
       const state = await response.json();
+      updateRegistrationTriggers(state.registration_open === true);
       if (!state.registration_open) return;
       if (state.participant) {
         renderTeamTools(state.csrf_token);

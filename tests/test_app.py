@@ -175,6 +175,11 @@ class HackHeistAppTests(unittest.TestCase):
             403,
         )
 
+    def test_registration_state_is_exposed_when_open(self):
+        state = self.client.get("/api/state")
+        self.assertEqual(state.status_code, 200)
+        self.assertTrue(state.get_json()["registration_open"])
+
     def test_health_check(self):
         response = self.client.get("/healthz")
         self.assertEqual(response.status_code, 200)

@@ -70,7 +70,10 @@ def create_app(test_config=None):
 
     @app.get("/script.js")
     def javascript():
-        return send_from_directory(BASE_DIR, "script.js")
+        response = send_from_directory(BASE_DIR, "script.js")
+        response.cache_control.no_cache = True
+        response.cache_control.must_revalidate = True
+        return response
 
     @app.get("/assets/<path:filename>")
     def assets(filename):
