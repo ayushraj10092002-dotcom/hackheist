@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin access | HackHeist 2026</title>
+  <link rel="stylesheet" href="{{ url_for('stylesheet') }}">
+</head>
+<body class="admin-page">
+  <main class="admin-shell">
+    <p class="eyebrow">OPERATION ZERO / ADMIN</p>
+    <h1>Admin access</h1>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for category, message in messages %}
+        <p class="admin-message {{ category }}">{{ message }}</p>
+      {% endfor %}
+    {% endwith %}
+    <form method="post" class="admin-form">
+      <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" autocomplete="current-password" required>
+      <button type="submit">Enter dashboard</button>
+    </form>
+  </main>
+</body>
+</html>

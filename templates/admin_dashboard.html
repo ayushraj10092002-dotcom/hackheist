@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin dashboard | HackHeist 2026</title>
+  <link rel="stylesheet" href="{{ url_for('stylesheet') }}">
+</head>
+<body class="admin-page">
+  <main class="admin-shell admin-dashboard">
+    <div class="admin-header">
+      <div>
+        <p class="eyebrow">OPERATION ZERO / ADMIN</p>
+        <h1>Mission dashboard</h1>
+      </div>
+      <form method="post" action="{{ url_for('admin_logout') }}">
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+        <button type="submit">Log out</button>
+      </form>
+    </div>
+    <p class="admin-note">Team size limit: {{ team_size_limit }}. Participant records are visible only to authenticated admins.</p>
+    <div class="admin-summary" aria-label="Registration summary">
+      <div><span>Participants</span><strong>{{ participant_count }}</strong></div>
+      <div><span>Teams</span><strong>{{ team_count }}</strong></div>
+    </div>
+    <form class="admin-search" method="get" role="search">
+      <label for="admin-query">Filter participants or teams</label>
+      <div>
+        <input id="admin-query" name="q" value="{{ query }}" type="search" maxlength="100" placeholder="Name, email, team, or code">
+        <button type="submit">Filter</button>
+        {% if query %}<a href="{{ url_for('admin_dashboard') }}">Clear</a>{% endif %}
+      </div>
+    </form>
+    <section class="admin-panel">
+      <h2>Participants{% if query %} matching “{{ query }}”{% endif %} ({{ participants|length }})</h2>
+      <div class="admin-table-wrap">
+        <table>
+          <thead><tr><th>Name</th><th>Email</th><th>Registered</th></tr></thead>
+          <tbody>
+          {% for participant in participants %}
+            <tr><td>{{ participant["name"] }}</td><td>{{ participant["email"] }}</td><td>{{ participant["created_at"] }}</td></tr>
+          {% else %}
+            <tr><td colspan="3">No participants yet.</td></tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </section>
+    <section class="admin-panel">
+      <h2>Teams{% if query %} matching “{{ query }}”{% endif %} ({{ teams|length }})</h2>
+      <div class="admin-table-wrap">
+        <table>
+          <thead><tr><th>Team</th><th>Invitation code</th><th>Members</th></tr></thead>
+          <tbody>
+          {% for team in teams %}
+            <tr><td>{{ team["name"] }}</td><td>{{ team["invite_code"] }}</td><td>{{ team["member_count"] }} / {{ team_size_limit }}</td></tr>
+          {% else %}
+            <tr><td colspan="3">No teams yet.</td></tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
