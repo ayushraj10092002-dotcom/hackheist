@@ -24,7 +24,11 @@ from werkzeug.security import check_password_hash
 
 BASE_DIR = Path(__file__).resolve().parent
 EMAIL_RE = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
-DEFAULT_DATABASE = BASE_DIR / "instance" / "hackheist.sqlite3"
+DEFAULT_DATABASE = (
+    Path("/tmp") / "hackheist.sqlite3"
+    if os.environ.get("VERCEL")
+    else BASE_DIR / "instance" / "hackheist.sqlite3"
+)
 
 
 def create_app(test_config=None):
@@ -32,8 +36,12 @@ def create_app(test_config=None):
     app.config.from_mapping(
         SECRET_KEY=os.environ.get("SECRET_KEY") or secrets.token_hex(32),
         DATABASE_PATH=os.environ.get("DATABASE_PATH", str(DEFAULT_DATABASE)),
-        REGISTRATION_OPEN=os.environ.get("REGISTRATION_OPEN", "false").lower() == "true",
+        REGISTRATION_OPEN=os.environ.get("REGISTRATION_OPEN", "true").lower() == "true",
         TEAM_SIZE_LIMIT=int(os.environ.get("TEAM_SIZE_LIMIT", "4")),
+        GOOGLE_FORM_URL=os.environ.get(
+            "GOOGLE_FORM_URL",
+            "https://docs.google.com/forms/d/e/1FAIpQLSfVNx0ANEqMHLlsm-qei1T_ARVQa9C97G1bzYVMt-OGNvQSBg/viewform?usp=publish-edito",
+        ),
         ADMIN_PASSWORD_HASH=os.environ.get("ADMIN_PASSWORD_HASH", ""),
         SESSION_COOKIE_HTTPONLY=True,
         SESSION_COOKIE_SAMESITE="Lax",
@@ -91,6 +99,7 @@ def create_app(test_config=None):
                 "csrf_token": csrf_token(),
                 "participant": current_participant(app),
                 "team_size_limit": app.config["TEAM_SIZE_LIMIT"],
+                "google_form_url": app.config["GOOGLE_FORM_URL"],
             }
         )
 
@@ -196,18 +205,16 @@ def create_app(test_config=None):
 
         try:
             with get_db(app) as db:
-                db.execute(
+                cursor = db.execute(
                     "INSERT INTO participants (name, email) VALUES (?, ?)",
                     (name, email),
                 )
+                participant_id = cursor.lastrowid
         except sqlite3.IntegrityError:
             return form_error("That email is already registered.", "register")
 
-        with get_db(app) as db:
-            participant = db.execute(
-                "SELECT id FROM participants WHERE email = ?", (email,)
-            ).fetchone()
-        session["participant_id"] = participant["id"]
+        # Save the new participant in the session so team actions know who is logged in.
+        session["participant_id"] = participant_id
         flash("Registration received. Keep your invitation code safe.", "success")
         return redirect(url_for("index", _anchor="details"))
 
@@ -259,7 +266,7 @@ def create_app(test_config=None):
             team = db.execute(
                 "SELECT id, name FROM teams WHERE invite_code = ?", (invite_code,)
             ).fetchone()
-            if participant is None or team is None:
+            if team is None:
                 return form_error("Check your registered email and invitation code.", "team")
 
             member_count = db.execute(

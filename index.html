@@ -2,37 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="HackHeist 2026 — a cyber-heist-inspired learning and building experience by GDG on Campus MIET.">
-  <meta property="og:title" content="HackHeist 2026 — Break Into the Future">
-  <meta property="og:description" content="A student-led mission for curious minds by GDG on Campus MIET.">
-  <meta property="og:type" content="website">
-  <meta property="og:image" content="assets/images/hero-vault.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="HackHeist 2026 by GDG on Campus MIET.">
   <title>HackHeist 2026 | GDG on Campus MIET</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="operation-intro" data-operation-intro>
-    <div class="intro-terminal" role="status" aria-live="polite">
-      <span data-intro-line>SECURITY PROTOCOL: ACTIVE</span>
-      <span>ENCRYPTED CHANNEL ESTABLISHED</span>
-      <span>OPERATION ZERO: INITIALIZED</span>
-      <strong>WELCOME, OPERATIVE.</strong>
-    </div>
-    <button class="intro-skip" type="button" data-intro-skip>Skip intro</button>
-  </div>
-  <aside class="operation-progress" aria-label="Operation progress">
-    <span class="progress-line" aria-hidden="true"></span>
-    <ol>
-      <li data-progress-step="hero"><span>01</span><b>BRIEFING</b></li>
-      <li data-progress-step="about"><span>02</span><b>ASSEMBLE</b></li>
-      <li data-progress-step="highlights"><span>03</span><b>EXECUTE</b></li>
-      <li data-progress-step="details"><span>04</span><b>DEBRIEF</b></li>
-    </ol>
-  </aside>
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="#hero" aria-label="HackHeist home">
@@ -40,158 +15,133 @@
         <span>GDG ON CAMPUS <strong>MIET</strong></span>
       </a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
-        <span></span><span></span><span></span><span class="sr-only">Toggle navigation</span>
+        <span></span><span></span><span></span>
+        <span class="sr-only">Toggle navigation</span>
       </button>
       <nav id="site-nav" class="site-nav" aria-label="Main navigation">
-        <a href="#about">Mission brief</a>
-        <a href="#highlights">Modules</a>
-        <a href="#details">Access brief</a>
-        <a class="nav-cta" href="#cta">Enter mission <span aria-hidden="true">↗</span></a>
+        <a href="#about">About</a>
+        <a href="#highlights">Highlights</a>
+        <a href="#details">Details</a>
+        <a href="#cta">Register</a>
       </nav>
     </div>
   </header>
 
   <main>
     <section id="hero" aria-labelledby="hero-title">
-      <div class="hero-grid texture">
-        <div class="laser-field" aria-hidden="true"><span></span><span></span><span></span></div>
-        <div class="hero-media" aria-hidden="true">
-          <img src="assets/images/hero-vault.jpg" alt="">
+      <div class="container hero-content">
+        <p class="eyebrow">GDG ON CAMPUS MIET</p>
+        <h1 id="hero-title">HACK<span>HEIST</span> 2026</h1>
+        <p class="hero-tagline">BUILD. BREAK. SOLVE.</p>
+        <p class="hero-intro">
+          A student-led event for curious minds who want to learn, build,
+          solve problems, and connect with other developers.
+        </p>
+        <p class="hero-organizer">Organized by GDG on Campus MIET</p>
+        <div class="hero-actions">
+          <button class="button button-primary button-disabled" type="button"
+                  data-registration-trigger disabled aria-disabled="true">
+            Register Now <span>/ Opening Soon</span>
+          </button>
+          <a class="text-link" href="#about">Learn more</a>
         </div>
-        <div class="container hero-content reveal">
-          <p class="eyebrow"><span class="status-dot"></span> GDG ON CAMPUS MIET <span class="eyebrow-line"></span> 2026</p>
-          <h1 id="hero-title">HACK<span>HEIST</span><br><em>OPERATION ZERO.</em></h1>
-          <p class="hero-tagline">BUILD. BREAK. SOLVE.</p>
-          <p class="hero-intro">A student-led mission for curious minds who turn impossible-looking problems into working prototypes.</p>
-          <p class="hero-heist-line">HackHeist 2026 / GDG on Campus MIET</p>
-          <div class="mission-chip"><span class="chip-key">MISSION</span><strong>BREAK INTO THE FUTURE</strong><span class="chip-pulse"></span></div>
-          <div class="status-rotator" aria-live="polite"><span class="status-rotator-dot"></span><span data-status-message>Security level: probably fine.</span></div>
-          <div class="security-scanner" aria-hidden="true"><span></span><b>SCANNING FOR ADULT SUPERVISION...</b></div>
-          <p class="intruder-alert" aria-hidden="true">INTRUDER DETECTED: someone who actually read the documentation.</p>
-          <div class="hero-actions">
-            <button class="button button-primary button-disabled" type="button" data-registration-trigger disabled aria-disabled="true">Register Now <span>/ Opening Soon</span></button>
-            <a class="text-link" href="#about">Explore the mission <span aria-hidden="true">↓</span></a>
-          </div>
-          <div class="hero-meta" aria-label="Event information">
-            <div><span class="meta-label">DATE</span><strong>Date to be announced</strong></div>
-            <div><span class="meta-label">VENUE</span><strong>MIET, Meerut</strong></div>
-          </div>
-        </div>
-        <div class="hero-visual reveal" aria-hidden="true">
-          <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
-          <div class="vault">
-            <span class="vault-label">ACCESS / 2026</span><span class="vault-code">H<span>H</span>_01</span>
-            <span class="vault-corner vault-corner-tl"></span><span class="vault-corner vault-corner-br"></span><span class="vault-cross"></span>
-          </div>
-          <div class="vault-wheel"><i></i><i></i><i></i><i></i><span>?</span></div>
-          <span class="comic-callout callout-bonk">BONK!</span>
-          <span class="comic-callout callout-plot">PLOT TWIST!</span>
-          <span class="comic-thief" aria-hidden="true"><span class="thief-mask"></span><span class="thief-body"></span><span class="banana">⌁</span><span class="usb">▰</span></span>
-          <span class="smoke-puffs" aria-hidden="true"><i></i><i></i><i></i></span>
-          <span class="visual-note note-top">CREATIVE<br>PROTOCOL</span><span class="visual-note note-bottom">UNLOCK<br>YOUR EDGE</span>
+        <div class="event-summary" aria-label="Event information">
+          <div><span>Date</span><strong>Date to be announced</strong></div>
+          <div><span>Time</span><strong>9:00 AM onwards</strong></div>
+          <div><span>Venue</span><strong>MIET, Meerut</strong></div>
         </div>
       </div>
     </section>
 
     <section id="about" aria-labelledby="about-title">
-      <div class="container about-layout">
-        <div class="section-intro reveal">
-          <p class="eyebrow"><span class="eyebrow-number">01</span> THE BRIEF</p>
-        <h2 id="about-title">The mission<br>needs <em>your</em><br>mind.</h2>
+      <div class="container two-column">
+        <div>
+          <p class="eyebrow">01 / ABOUT</p>
+          <h2 id="about-title">Learn, build, and grow together.</h2>
         </div>
-        <div class="about-copy reveal">
-          <p class="lead">HackHeist is a creative pressure-test for ideas, skills, and teamwork.</p>
-          <p>Decode a problem, learn from people who build, and make something that earns its place in the world. The brief is simple: collaborate boldly, solve thoughtfully, and leave with a sharper sense of what you can do.</p>
-          <div class="about-signal"><span></span> LEARNING IN PROGRESS <b>↗</b></div>
-          <div class="brief-foot"><span>CLASSIFIED / 01</span><span>MIET NODE</span></div>
-          <div class="mission-notes"><p>No actual banks were harmed in the making of this hackathon.</p><p>The only thing we're stealing is the spotlight.</p></div>
-        </div>
-        <div class="mission-room reveal" aria-label="Abstract mission-room schematic" role="img">
-          <div class="room-header"><span>MIET NODE / 01</span><span>ENCRYPTED BRIEF</span></div>
-          <div class="room-grid" aria-hidden="true"></div>
-          <div class="room-crosshair" aria-hidden="true"></div>
-          <div class="room-core" aria-hidden="true"><span>HH</span><small>MISSION CORE</small></div>
-          <div class="room-orbit room-orbit-one" aria-hidden="true"></div>
-          <div class="room-orbit room-orbit-two" aria-hidden="true"></div>
-          <span class="room-node node-one" aria-hidden="true"></span>
-          <span class="room-node node-two" aria-hidden="true"></span>
-          <span class="room-node node-three" aria-hidden="true"></span>
-          <span class="room-line line-one" aria-hidden="true"></span>
-          <span class="room-line line-two" aria-hidden="true"></span>
-          <span class="room-line line-three" aria-hidden="true"></span>
-          <div class="room-annotation annotation-top">THINK<br>TOGETHER</div>
-          <div class="room-annotation annotation-bottom">BREAK THE<br>PATTERN</div>
-          <div class="room-footer"><span>ACCESS VECTOR: COLLABORATION</span><b>● LIVE</b></div>
+        <div class="section-copy">
+          <p>
+            HackHeist is a student-focused learning and building experience.
+            Work with a team, learn from developers, and turn your ideas into
+            useful prototypes.
+          </p>
+          <p>
+            You do not need to be an expert. Bring your curiosity, practice
+            your skills, and meet people who enjoy building technology.
+          </p>
         </div>
       </div>
     </section>
 
     <section id="highlights" aria-labelledby="highlights-title">
       <div class="container">
-        <div class="section-heading reveal">
-          <div><p class="eyebrow"><span class="eyebrow-number">02</span> CHOOSE YOUR MISSION</p><h2 id="highlights-title">Four ways<br>to <em>break in.</em></h2></div>
-          <p>Four entry points.<br>One shared objective.</p>
+        <p class="eyebrow">02 / EVENT HIGHLIGHTS</p>
+        <h2 id="highlights-title">Something useful for every builder.</h2>
+        <div class="highlight-grid">
+          <article class="highlight-card">
+            <span class="card-number">01</span>
+            <h3>Hackathon</h3>
+            <p>Build and present an idea with a team.</p>
+          </article>
+          <article class="highlight-card">
+            <span class="card-number">02</span>
+            <h3>Workshop</h3>
+            <p>Learn practical development skills through guided sessions.</p>
+          </article>
+          <article class="highlight-card">
+            <span class="card-number">03</span>
+            <h3>Tech Session</h3>
+            <p>Learn from developers and understand real-world technology.</p>
+          </article>
+          <article class="highlight-card">
+            <span class="card-number">04</span>
+            <h3>Networking</h3>
+            <p>Meet students, mentors, and members of the developer community.</p>
+          </article>
         </div>
-        <ul class="highlight-grid">
-          <li class="highlight-card card-blue reveal" data-hover-message="Compile first. Panic later."><div class="card-media"><img src="assets/images/hackathon-circuit.jpg" alt="Close-up of a computer circuit board" loading="lazy"></div><span class="card-index">01 / 04</span><span class="card-icon" aria-hidden="true">⌁</span><h3>Hackathon</h3><p>Build and showcase your ideas with a team that gets it.</p><span class="card-hover-message" aria-hidden="true">Compile first. Panic later.</span><span class="card-arrow" aria-hidden="true">↗</span></li>
-          <li class="highlight-card card-red reveal" data-hover-message="Turning coffee into commits."><div class="card-media"><img src="assets/images/workshop-team.jpg" alt="Students collaborating around a laptop" loading="lazy"></div><span class="card-index">02 / 04</span><span class="card-icon" aria-hidden="true">✦</span><h3>Workshop</h3><p>Learn practical development skills you can use immediately.</p><span class="card-hover-message" aria-hidden="true">Turning coffee into commits.</span><span class="card-arrow" aria-hidden="true">↗</span></li>
-          <li class="highlight-card card-yellow reveal" data-hover-message="It's not a bug. It's a plot twist."><div class="card-media"><img src="assets/images/tech-session-server.jpg" alt="Blue-lit server hardware representing technical systems" loading="lazy"></div><span class="card-index">03 / 04</span><span class="card-icon" aria-hidden="true">◈</span><h3>Tech Session</h3><p>Learn from experienced developers who have shipped the work.</p><span class="card-hover-message" aria-hidden="true">It's not a bug. It's a plot twist.</span><span class="card-arrow" aria-hidden="true">↗</span></li>
-          <li class="highlight-card card-green reveal" data-hover-message="Making friends before asking for GitHub stars."><div class="card-media"><img src="assets/images/networking-team.jpg" alt="Team members connecting during a collaborative session" loading="lazy"></div><span class="card-index">04 / 04</span><span class="card-icon" aria-hidden="true">◎</span><h3>Networking</h3><p>Connect with students and the developer community.</p><span class="card-hover-message" aria-hidden="true">Making friends before asking for GitHub stars.</span><span class="card-arrow" aria-hidden="true">↗</span></li>
-        </ul>
       </div>
     </section>
 
     <section id="details" aria-labelledby="details-title">
-      <div class="container details-layout">
-        <div class="section-intro reveal"><p class="eyebrow"><span class="eyebrow-number">03</span> ACCESS THE BRIEFING</p><h2 id="details-title">Know the<br><em>coordinates.</em></h2></div>
-        <div class="dossier-label">DOSSIER / HH-2026-OP0 <span>CLASSIFIED</span></div>
-        <dl class="details-list dossier reveal">
-          <div class="detail-row"><dt>Event</dt><dd>HackHeist 2026</dd></div>
-          <div class="detail-row"><dt>Date</dt><dd>Date to be announced</dd></div>
-          <div class="detail-row"><dt>Time</dt><dd>9:00 AM onwards</dd></div>
-          <div class="detail-row"><dt>Venue</dt><dd>MIET, Meerut</dd></div>
-        </dl>
-        <p class="details-warning reveal">Warning: side effects may include new friends, broken code, and suspicious confidence.</p>
-        <div class="event-access-panel reveal" data-event-access aria-live="polite">
-          <p class="eyebrow">REGISTRATION CHANNEL</p>
-          <p>Registration Opening Soon</p>
+      <div class="container two-column">
+        <div>
+          <p class="eyebrow">03 / EVENT DETAILS</p>
+          <h2 id="details-title">Plan your visit.</h2>
         </div>
-        <div class="vault-challenge reveal" aria-labelledby="challenge-title">
-          <p class="eyebrow">OPTIONAL SIDE QUEST</p>
-          <h3 id="challenge-title">Crack the vault</h3>
-          <p class="challenge-copy">Find the three-digit code. Clue: use the last two digits of the event year, then the number of core mission modules.</p>
-          <form class="challenge-form">
-            <label for="vault-code-input">Enter code <span class="sr-only">(three digits)</span></label>
-            <input id="vault-code-input" name="vault-code" type="text" inputmode="numeric" pattern="[0-9]{3}" maxlength="3" autocomplete="off" required>
-            <button class="button button-secondary" type="submit">Test code</button>
-          </form>
-          <p class="challenge-status" role="status" aria-live="polite">Three attempts. No pressure.</p>
-          <p class="challenge-success" role="status" aria-live="polite" hidden>OPERATION ZERO: ACCESS GRANTED.</p>
-          <button class="challenge-reset" type="button" hidden>Reset attempt</button>
+        <div class="details-list">
+          <div><span>Event</span><strong>HackHeist 2026</strong></div>
+          <div><span>Date</span><strong>Date to be announced</strong></div>
+          <div><span>Time</span><strong>9:00 AM onwards</strong></div>
+          <div><span>Venue</span><strong>MIET, Meerut</strong></div>
         </div>
-        <div class="faq-panel reveal" aria-labelledby="faq-title">
-          <p class="eyebrow">INTEL CHECK</p>
-          <h3 id="faq-title">Before you enter</h3>
-          <details><summary>Is the event date confirmed?</summary><p>Not yet. The date will remain “Date to be announced” until the official confirmation.</p></details>
-          <details><summary>What is confirmed right now?</summary><p>HackHeist 2026, MIET, Meerut, and 9:00 AM onwards are the current published details.</p></details>
+        <div class="event-access-panel" data-event-access>
+          <p class="eyebrow">REGISTRATION</p>
+          <p>Registration details will appear here when registration opens.</p>
         </div>
       </div>
     </section>
 
     <section id="cta" aria-labelledby="cta-title">
-      <div class="container cta-inner reveal">
-        <p class="eyebrow"><span class="status-dot"></span> YOUR MOVE</p>
-        <h2 id="cta-title">Ready to<br><em>HackHeist?</em></h2>
-        <p>When the signal goes live, bring your curiosity and your best unfinished idea.</p>
-        <p class="cta-alert"><span>VAULT STATUS:</span> Registration opening soon.</p>
-        <button class="button button-primary button-disabled" type="button" data-registration-trigger disabled aria-disabled="true">Register Now <span>/ Opening Soon</span></button>
+      <div class="container cta-content">
+        <p class="eyebrow">04 / TAKE PART</p>
+        <h2 id="cta-title">Ready to build?</h2>
+        <p>Bring your ideas and join the HackHeist community.</p>
+        <button class="button button-primary button-disabled" type="button"
+                data-registration-trigger disabled aria-disabled="true">
+          Register Now <span>/ Opening Soon</span>
+        </button>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <div class="container footer-inner"><p>HACKHEIST <span>2026</span></p><p>GDG ON CAMPUS MIET</p><p>&copy; 2026 / KEEP BUILDING</p></div>
+    <div class="container footer-inner">
+      <span>HACKHEIST 2026</span>
+      <span>GDG ON CAMPUS MIET</span>
+      <a href="/admin/login">Admin Login</a>
+    </div>
   </footer>
+
   <script src="script.js"></script>
 </body>
 </html>

@@ -180,6 +180,15 @@ class HackHeistAppTests(unittest.TestCase):
         self.assertEqual(state.status_code, 200)
         self.assertTrue(state.get_json()["registration_open"])
 
+    def test_registration_uses_google_form_url(self):
+        state = self.client.get("/api/state")
+        self.assertEqual(state.status_code, 200)
+        expected_url = "https://docs.google.com/forms/d/e/1FAIpQLSfVNx0ANEqMHLlsm-qei1T_ARVQa9C97G1bzYVMt-OGNvQSBg/viewform?usp=publish-edito"
+        self.assertEqual(state.get_json()["google_form_url"], expected_url)
+        project_root = Path(__file__).resolve().parents[1]
+        script = (project_root / "script.js").read_text()
+        self.assertIn(expected_url, script)
+
     def test_registration_controls_use_server_state(self):
         project_root = Path(__file__).resolve().parents[1]
         index = (project_root / "index.html").read_text()
@@ -201,6 +210,13 @@ class HackHeistAppTests(unittest.TestCase):
         response = self.client.get("/healthz")
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.get_json(), {"status": "ok"})
+
+    def test_admin_login_route_is_reachable_from_footer(self):
+        login = self.client.get("/admin/login")
+        self.assertEqual(login.status_code, 200)
+        self.assertIn(b'name="password"', login.data)
+        index = Path(__file__).resolve().parents[1] / "index.html"
+        self.assertIn('href="/admin/login"', index.read_text())
 
     def test_admin_requires_login_and_shows_records(self):
         self.assertEqual(self.client.get("/admin").status_code, 302)
